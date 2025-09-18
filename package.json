@@ -1,0 +1,11 @@
+{
+    "name": "christies-scraper",
+    "scripts": {
+        "scrape": "AUCTION_URL='https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber' node scripts/scrape.js"
+    },
+    "dependencies": { "playwright": "^1.47.0" }
+
+      
+  }
+  
+  

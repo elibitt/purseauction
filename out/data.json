@@ -1,0 +1,209 @@
+{
+  "ts": "2025-09-18T19:42:38.481Z",
+  "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
+  "lots_requested": [
+    5,
+    18,
+    20,
+    28,
+    45,
+    69,
+    75,
+    79,
+    86,
+    87,
+    105,
+    106,
+    117,
+    118,
+    140,
+    141,
+    144,
+    145,
+    146,
+    158
+  ],
+  "total": 207700,
+  "entries": [
+    {
+      "lot": 5,
+      "current_bid": 6000,
+      "next_bid": 6500,
+      "shown_amount": 6000,
+      "status": "Open",
+      "estimate": "Estimate: USD 4,000 - 6,000",
+      "bid_text": "USD 6,000"
+    },
+    {
+      "lot": 18,
+      "current_bid": 9000,
+      "next_bid": 9500,
+      "shown_amount": 9000,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 9,000"
+    },
+    {
+      "lot": 20,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 7,000"
+    },
+    {
+      "lot": 28,
+      "current_bid": 7500,
+      "next_bid": 8000,
+      "shown_amount": 7500,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 7,500"
+    },
+    {
+      "lot": 45,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 7,000"
+    },
+    {
+      "lot": 69,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 7,000"
+    },
+    {
+      "lot": 75,
+      "current_bid": 7500,
+      "next_bid": 8000,
+      "shown_amount": 7500,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 7,500"
+    },
+    {
+      "lot": 79,
+      "current_bid": 6000,
+      "next_bid": 6500,
+      "shown_amount": 6000,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 6,000"
+    },
+    {
+      "lot": 86,
+      "current_bid": 28000,
+      "next_bid": 30000,
+      "shown_amount": 28000,
+      "status": "Open",
+      "estimate": "Estimate: USD 20,000 - 25,000",
+      "bid_text": "USD 28,000"
+    },
+    {
+      "lot": 87,
+      "current_bid": 18000,
+      "next_bid": 19000,
+      "shown_amount": 18000,
+      "status": "Open",
+      "estimate": "Estimate: USD 20,000 - 25,000",
+      "bid_text": "USD 18,000"
+    },
+    {
+      "lot": 105,
+      "current_bid": 6000,
+      "next_bid": 6500,
+      "shown_amount": 6000,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 6,000"
+    },
+    {
+      "lot": 106,
+      "current_bid": 6500,
+      "next_bid": 7000,
+      "shown_amount": 6500,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 6,500"
+    },
+    {
+      "lot": 117,
+      "current_bid": 2200,
+      "next_bid": 2400,
+      "shown_amount": 2200,
+      "status": "Open",
+      "estimate": "Estimate: USD 3,000 - 4,000",
+      "bid_text": "USD 2,200"
+    },
+    {
+      "lot": 118,
+      "current_bid": 7500,
+      "next_bid": 8000,
+      "shown_amount": 7500,
+      "status": "Open",
+      "estimate": "Estimate: USD 10,000 - 12,000",
+      "bid_text": "USD 7,500"
+    },
+    {
+      "lot": 140,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
+      "status": "Open",
+      "estimate": "Estimate: USD 7,000 - 9,000",
+      "bid_text": "USD 7,000"
+    },
+    {
+      "lot": 141,
+      "current_bid": 6500,
+      "next_bid": 7000,
+      "shown_amount": 6500,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 6,500"
+    },
+    {
+      "lot": 144,
+      "current_bid": 18000,
+      "next_bid": 19000,
+      "shown_amount": 18000,
+      "status": "Open",
+      "estimate": "Estimate: USD 20,000 - 25,000",
+      "bid_text": "USD 18,000"
+    },
+    {
+      "lot": 145,
+      "current_bid": 18000,
+      "next_bid": 19000,
+      "shown_amount": 18000,
+      "status": "Open",
+      "estimate": "Estimate: USD 20,000 - 25,000",
+      "bid_text": "USD 18,000"
+    },
+    {
+      "lot": 146,
+      "current_bid": 9000,
+      "next_bid": 9000,
+      "shown_amount": 9000,
+      "status": "Open",
+      "estimate": "Estimate: USD 12,000 - 15,000",
+      "bid_text": "USD 9,000"
+    },
+    {
+      "lot": 158,
+      "current_bid": 24000,
+      "next_bid": 26000,
+      "shown_amount": 24000,
+      "status": "Open",
+      "estimate": "Estimate: USD 20,000 - 25,000",
+      "bid_text": "USD 24,000"
+    }
+  ]
+}
