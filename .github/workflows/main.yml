@@ -1,0 +1,47 @@
+name: Scrape Christies
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "*/30 * * * *"  # every 30 minutes; adjust as needed
+
+permissions:
+  contents: write   # allow committing back to repo
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run scraper
+        env:
+          AUCTION_URL: https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?loadall=true
+        run: npm run scrape
+
+      - name: Move JSON into tracked folder
+        run: |
+          mkdir -p data
+          mv out/data.json data/data.json
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/data.json
+          git diff --cached --quiet || git commit -m "Update auction data"
+          git push
