@@ -369,8 +369,8 @@
 
     function findCurrentBid(entry) {
       if (entry.current_bid && entry.current_bid > 0) {
-        // We don't have bid count in JSON, so we'll use a placeholder
-        return { bids: 1, amount: entry.current_bid };
+        // Use the actual bid count from the scraped data
+        return { bids: entry.bid_count || 1, amount: entry.current_bid };
       }
       return null;
     }
@@ -386,6 +386,26 @@
     function findClosing(entry) {
       // We don't have closing info in the JSON, so return null
       return null;
+    }
+
+    function formatTimeRemaining(timeRemainingMs) {
+      if (!timeRemainingMs || timeRemainingMs <= 0) {
+        return "Auction has ended";
+      }
+      
+      const totalMinutes = Math.floor(timeRemainingMs / (1000 * 60));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const days = Math.floor(hours / 24);
+      const remainingHours = hours % 24;
+      
+      if (days > 0) {
+        return `${days} day${days > 1 ? 's' : ''}, ${remainingHours} hour${remainingHours !== 1 ? 's' : ''} remaining`;
+      } else if (hours > 0) {
+        return `${hours} hour${hours !== 1 ? 's' : ''}, ${minutes} minute${minutes !== 1 ? 's' : ''} remaining`;
+      } else {
+        return `${minutes} minute${minutes !== 1 ? 's' : ''} remaining`;
+      }
     }
 
     function currency(n) {
@@ -509,11 +529,11 @@
           bidType = "Current";
         } else if (entry && entry.shown_amount && entry.shown_amount > 0) {
           usedAmount = entry.shown_amount;
-          bidsCount = 1;
+          bidsCount = entry.bid_count || 1;
           bidType = "Current";
         } else {
           usedAmount = 0;
-          bidsCount = 0;
+          bidsCount = entry ? (entry.bid_count || 0) : 0;
           bidType = starting != null ? "No Bids Yet" : null;
         } 
 
@@ -533,7 +553,7 @@
       return rows;
     }
 
-    function render(results) {
+    function render(results, auctionData) {
       const container = document.getElementById("results");
       const total = results
         .filter(r => typeof r.amount === "number" && r.amount > 0)
@@ -541,9 +561,11 @@
 
       const missingCurrent = results.filter(r => r.startingOnly);
       const notFound = results.filter(r => r.missing);
+      const lotsWithBids = results.filter(r => r.bidsCount > 0).length;
+      const lotsWithoutBids = results.filter(r => r.bidsCount === 0).length;
 
       let html = "";
-      html += `<div class="totals">Sum of selected bids: ${currency(total)}</div>`;
+      html += `<div class="totals">Sum of selected bids: ${currency(total)} (${lotsWithBids} lots with bids, ${lotsWithoutBids} lots without bids)</div>`;
 
       if (notFound.length) {
         html += `<div class="note warn">${notFound.length} lot(s) not found in data: ${notFound.map(r => r.lot).join(", ")}.</div>`;
@@ -607,15 +629,22 @@
         // Load data from embedded JSON
         const data = await loadAuctionData();
         
-      // Update closing info
-        const closingInfo = data.auction_url ? 
-          `Auction data loaded from ${new Date(data.ts).toLocaleString()}` : 
-          "Auction data not available";
-      document.getElementById('closing-info').textContent = closingInfo;
+        // Update closing info with auction closing time
+        let closingInfo = "Auction data not available";
+        if (data.auction_url) {
+          const dataTime = new Date(data.ts).toLocaleString();
+          if (data.auction_closing && data.auction_closing.time_remaining_ms) {
+            const timeRemaining = formatTimeRemaining(data.auction_closing.time_remaining_ms);
+            closingInfo = `Auction closes: ${timeRemaining} (Data from ${dataTime})`;
+          } else {
+            closingInfo = `Auction data loaded from ${dataTime}`;
+          }
+        }
+        document.getElementById('closing-info').textContent = closingInfo;
       
         // Run the summary with JSON data
         const rows = parseTargetLotsFromJSON(data, data.lots_requested);
-      render(rows);
+        render(rows, data);
       } catch (error) {
         console.error('Error running summary:', error);
         document.getElementById('closing-info').textContent = "Error loading auction data";

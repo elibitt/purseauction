@@ -22,6 +22,37 @@ function toNumber(x) {
   return null;
 }
 
+function extractAuctionClosingTime(html) {
+  // Look for auction closing time in various formats
+  // This could be in a script tag or data attribute
+  const patterns = [
+    /"end_date":\s*"([^"]+)"/,
+    /"auction_end_time":\s*"([^"]+)"/,
+    /"closing_time":\s*"([^"]+)"/,
+    /"end_time":\s*"([^"]+)"/
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match && match[1]) {
+      try {
+        const date = new Date(match[1]);
+        if (!isNaN(date.getTime())) {
+          return {
+            closing_time: match[1],
+            closing_timestamp: date.toISOString(),
+            time_remaining_ms: date.getTime() - Date.now()
+          };
+        }
+      } catch (e) {
+        // Continue to next pattern
+      }
+    }
+  }
+
+  return null;
+}
+
 // Given the full HTML string, extract every top-level object that contains `"lot_number":`
 function extractLotObjects(html) {
   const results = [];
@@ -79,10 +110,25 @@ function pickBidForLot(lotObj) {
     lotObj?.online_only_static_lot_data?.header_price ||
     null;
 
+  // Extract bid count from bid_count_txt field (e.g., " - 6 bids")
+  let bidCount = 0;
+  const bidCountTxt = lotObj?.bid_count_txt;
+  if (bidCountTxt) {
+    const match = bidCountTxt.match(/(\d+)\s*bids?/);
+    if (match) {
+      bidCount = parseInt(match[1], 10);
+    }
+  }
+
+  // Check if lot has no bids using the has_no_bids field or bid count
+  const hasNoBids = lotObj?.has_no_bids === true || bidCount === 0;
+
   return {
-    current_bid: currentBid,
+    current_bid: hasNoBids ? 0 : currentBid,
     next_bid: nextBid,
-    currency_text: currencyText
+    currency_text: currencyText,
+    bid_count: bidCount,
+    has_no_bids: hasNoBids
   };
 }
 
@@ -103,6 +149,9 @@ async function main() {
   // Grab the full HTML and parse embedded lot JSON
   const html = await page.content();
   await browser.close();
+
+  // Extract auction closing time
+  const auctionClosing = extractAuctionClosingTime(html);
 
   const allLots = extractLotObjects(html);
 
@@ -128,7 +177,9 @@ async function main() {
         shown_amount: null,
         status: null,
         estimate: null,
-        bid_text: null
+        bid_text: null,
+        bid_count: 0,
+        has_no_bids: true
       });
       continue;
     }
@@ -146,7 +197,9 @@ async function main() {
       shown_amount: chosen,                    // what we'll sum
       status: lot?.online_only_dynamic_lot_data?.item_status || null,
       estimate: lot?.online_only_static_lot_data?.header_price || null,
-      bid_text: bids.currency_text || null
+      bid_text: bids.currency_text || null,
+      bid_count: bids.bid_count,              // number of bids
+      has_no_bids: bids.has_no_bids           // boolean indicating if lot has no bids
     });
   }
 
@@ -161,14 +214,25 @@ async function main() {
         shown_amount: null,
         status: null,
         estimate: null,
-        bid_text: null
+        bid_text: null,
+        bid_count: 0,
+        has_no_bids: true
       });
     }
   }
 
   entries.sort((a, b) => a.lot - b.lot);
 
-  const total = entries.reduce((s, e) => s + (typeof e.shown_amount === "number" ? e.shown_amount : 0), 0);
+  // Calculate total excluding lots with no bids
+  const total = entries.reduce((s, e) => {
+    // Only include in total if lot has bids (not has_no_bids)
+    if (e.has_no_bids) return s;
+    return s + (typeof e.shown_amount === "number" ? e.shown_amount : 0);
+  }, 0);
+
+  // Count lots with and without bids
+  const lotsWithBids = entries.filter(e => !e.has_no_bids).length;
+  const lotsWithoutBids = entries.filter(e => e.has_no_bids).length;
 
   await fs.mkdir("out", { recursive: true });
   await fs.writeFile(
@@ -177,8 +241,11 @@ async function main() {
       {
         ts: new Date().toISOString(),
         auction_url: AUCTION_URL,
+        auction_closing: auctionClosing,
         lots_requested: Array.from(TARGET_LOTS).map(Number).sort((a, b) => a - b),
         total,
+        lots_with_bids: lotsWithBids,
+        lots_without_bids: lotsWithoutBids,
         entries
       },
       null,
@@ -187,7 +254,7 @@ async function main() {
     "utf8"
   );
 
-  console.log(`Wrote out/data.json — total: ${total}`);
+  console.log(`Wrote out/data.json — total: ${total} (${lotsWithBids} lots with bids, ${lotsWithoutBids} lots without bids)`);
 }
 
 main().catch(err => {
