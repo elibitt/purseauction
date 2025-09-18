@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Purse Auction!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { 
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      line-height: 1.35; 
+      --primary-color: #2563eb;
+      --success-color: #16a34a;
+      --warning-color: #ea580c;
+      --danger-color: #dc2626;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+    }
+    body { margin: 24px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); min-height: 100vh; }
+    h1 { font-size: 1.5rem; margin: 0 0 16px; color: var(--gray-800); font-weight: 700; }
+    textarea { 
+      width: 100%; height: 220px; padding: 12px; 
+      border: 2px solid var(--gray-200); border-radius: 12px; 
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9rem;
+      background: white;
+      transition: border-color 0.2s ease;
+    }
+    textarea:focus { outline: none; border-color: var(--primary-color); }
+    .controls { display: flex; gap: 12px; align-items: center; margin: 16px 0 20px; flex-wrap: wrap; }
+    button { 
+      padding: 12px 20px; border: 0; border-radius: 10px; cursor: pointer; 
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
+      color: white; font-weight: 600; font-size: 0.95rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+    button:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3); }
+    input[type="text"] { 
+      width: 100%; max-width: 520px; padding: 12px; 
+      border: 2px solid var(--gray-200); border-radius: 10px; 
+      font-size: 0.95rem;
+      background: white;
+      transition: border-color 0.2s ease;
+    }
+    input[type="text"]:focus { outline: none; border-color: var(--primary-color); }
+    .totals { 
+      font-weight: 700; margin: 16px 0; 
+      font-size: 1.1rem; color: var(--gray-800);
+      padding: 12px 16px; background: white; border-radius: 10px;
+      border-left: 4px solid var(--success-color);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .note { color: var(--gray-500); font-size: 0.9rem; }
+    .auction-info { 
+      margin: 16px 0 24px; 
+      padding: 12px 16px; 
+      background: var(--gray-50);
+      color: var(--gray-700); 
+      border-radius: 8px; 
+      text-align: center;
+      border: 1px solid var(--gray-200);
+    }
+    .auction-info h2 { 
+      margin: 0; 
+      font-size: 1.1rem; 
+      font-weight: 500; 
+    }
+    table { 
+      width: 100%; border-collapse: collapse; margin-top: 12px; 
+      background: white; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+    th, td { padding: 12px 16px; border-bottom: 1px solid var(--gray-100); vertical-align: top; }
+    th { 
+      text-align: left; background: var(--gray-50); position: sticky; top: 0; 
+      font-weight: 600; color: var(--gray-700); font-size: 0.9rem;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    tr:hover { background: var(--gray-50); }
+    .right { text-align: right; white-space: nowrap; }
+    .pill { 
+      display: inline-block; padding: 4px 12px; border-radius: 20px; 
+      font-size: 0.8rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .pill.current { background: linear-gradient(135deg, var(--success-color) 0%, #15803d 100%); color: white; }
+    .pill.starting { background: linear-gradient(135deg, var(--warning-color) 0%, #c2410c 100%); color: white; }
+    .warn { color: var(--danger-color); font-weight: 600; }
+    
+    /* Price visualization bar */
+    .price-visualization {
+      position: relative;
+    }
+    
+    .price-bar-container {
+      height: 20px;
+      background: linear-gradient(90deg, #fecaca 0%, #fed7aa 25%, #fef3c7 50%, #d1fae5 75%, #bbf7d0 100%);
+      border-radius: 10px;
+      position: relative;
+      border: 1px solid #e5e7eb;
+      overflow: visible;
+    }
+    
+    .price-marker {
+      position: absolute;
+      top: -2px;
+      width: 4px;
+      height: 24px;
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+    
+    .price-marker.estimate-low {
+      background: var(--gray-400);
+      border: none;
+      box-shadow: none;
+      width: 1px;
+      height: 20px;
+      top: 0;
+    }
+    
+    .price-marker.estimate-high {
+      background: var(--gray-400);
+      border: none;
+      box-shadow: none;
+      width: 1px;
+      height: 20px;
+      top: 0;
+    }
+    
+    .price-marker.current {
+      background: var(--success-color);
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px var(--success-color);
+      width: 8px;
+      height: 32px;
+      top: -6px;
+    }
+    
+    .price-marker.starting {
+      background: var(--warning-color);
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px var(--warning-color);
+      width: 4px;
+      height: 20px;
+    }
+    
+    .current-price-display {
+      text-align: center;
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      background: linear-gradient(135deg, var(--success-color) 0%, #15803d 100%);
+      color: white;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+    }
+    
+    .price-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      position: relative;
+      height: auto;
+      min-height: 20px;
+    }
+    
+    .price-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+      position: absolute;
+    }
+    
+    .price-label-value {
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+    
+    .price-label-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* No bid styling */
+    .no-bid { 
+      color: var(--gray-400); font-style: italic; 
+      background: var(--gray-50); padding: 8px 12px; 
+      border-radius: 8px; border: 1px dashed var(--gray-300);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      body { margin: 16px; }
+      table { font-size: 0.9rem; }
+      th, td { padding: 8px 6px; }
+      
+      /* Adjust column widths on mobile */
+      th:nth-child(1), td:nth-child(1) { /* Lot column */
+        width: 12%;
+        padding: 8px 4px;
+      }
+      
+      th:nth-child(2), td:nth-child(2) { /* Title column */
+        width: 35%;
+        padding: 8px 6px;
+      }
+      
+      th:nth-child(3), td:nth-child(3) { /* Price column */
+        width: 40%;
+        padding: 8px 6px;
+      }
+      
+      th:nth-child(4), td:nth-child(4) { /* Bids column */
+        width: 13%;
+        padding: 8px 4px;
+        text-align: center;
+      }
+      
+      /* Prevent price label overlap on mobile */
+      .price-labels {
+        position: relative;
+        height: auto;
+        min-height: 30px;
+        margin-top: 6px;
+      }
+      
+      .price-label {
+        position: absolute;
+        min-width: 50px;
+        transform: translateX(-50%);
+        top: 0;
+      }
+      
+      .price-label-value {
+        font-size: 0.7rem;
+        white-space: nowrap;
+      }
+      
+      .price-label-type {
+        font-size: 0.6rem;
+      }
+      
+      /* Stack labels vertically if they're too close */
+      .price-label:nth-child(1) {
+        z-index: 2;
+      }
+      
+      .price-label:nth-child(2) {
+        z-index: 1;
+      }
+    }
+    
+    /* For very small screens, ensure minimum spacing */
+    @media (max-width: 480px) {
+      .price-labels {
+        height: auto;
+        min-height: 35px;
+        margin-top: 8px;
+      }
+      
+      .price-label {
+        min-width: 45px;
+      }
+      
+      .price-label-value {
+        font-size: 0.65rem;
+      }
+      
+      .price-label-type {
+        font-size: 0.55rem;
+      }
+      
+      /* Further optimize column widths for very small screens */
+      th, td { padding: 6px 3px; }
+      
+      th:nth-child(1), td:nth-child(1) { /* Lot column */
+        width: 10%;
+        padding: 6px 2px;
+      }
+      
+      th:nth-child(2), td:nth-child(2) { /* Title column */
+        width: 38%;
+        padding: 6px 4px;
+      }
+      
+      th:nth-child(3), td:nth-child(3) { /* Price column */
+        width: 42%;
+        padding: 6px 4px;
+      }
+      
+      th:nth-child(4), td:nth-child(4) { /* Bids column */
+        width: 10%;
+        padding: 6px 2px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Purse Auction!</h1>
+  
+  <div class="auction-info">
+    <h2 id="closing-info">Loading...</h2>
+    <button onclick="runSummary()" style="margin-top: 8px; padding: 8px 16px; font-size: 0.9rem;">Refresh Data</button>
+  </div>
+
+  <!-- Load data from data.json file -->
+
+  <div id="results"></div>
+
+  <script>
+    // Embedded auction data to avoid CORS issues with file:// protocol
+    const EMBEDDED_AUCTION_DATA = {
+      "ts": "2025-09-18T18:39:25.698Z",
+      "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
+      "lots_requested": [5, 18, 20, 28, 45, 69, 75, 79, 86, 87, 105, 106, 117, 118, 140, 141, 144, 145, 146, 158],
+      "total": 206700,
+      "entries": [
+        {"lot": 5, "current_bid": 5500, "next_bid": 6000, "shown_amount": 5500, "status": "Open", "estimate": "Estimate: USD 4,000 - 6,000", "bid_text": "USD 5,500"},
+        {"lot": 18, "current_bid": 9000, "next_bid": 9500, "shown_amount": 9000, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 9,000"},
+        {"lot": 20, "current_bid": 7000, "next_bid": 7500, "shown_amount": 7000, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 7,000"},
+        {"lot": 28, "current_bid": 7500, "next_bid": 8000, "shown_amount": 7500, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 7,500"},
+        {"lot": 45, "current_bid": 7000, "next_bid": 7500, "shown_amount": 7000, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 7,000"},
+        {"lot": 69, "current_bid": 7000, "next_bid": 7500, "shown_amount": 7000, "status": "Open", "estimate": "Estimate: USD 8,000 - 10,000", "bid_text": "USD 7,000"},
+        {"lot": 75, "current_bid": 7500, "next_bid": 8000, "shown_amount": 7500, "status": "Open", "estimate": "Estimate: USD 8,000 - 10,000", "bid_text": "USD 7,500"},
+        {"lot": 79, "current_bid": 6000, "next_bid": 6500, "shown_amount": 6000, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 6,000"},
+        {"lot": 86, "current_bid": 28000, "next_bid": 30000, "shown_amount": 28000, "status": "Open", "estimate": "Estimate: USD 20,000 - 25,000", "bid_text": "USD 28,000"},
+        {"lot": 87, "current_bid": 18000, "next_bid": 19000, "shown_amount": 18000, "status": "Open", "estimate": "Estimate: USD 20,000 - 25,000", "bid_text": "USD 18,000"},
+        {"lot": 105, "current_bid": 6000, "next_bid": 6500, "shown_amount": 6000, "status": "Open", "estimate": "Estimate: USD 8,000 - 10,000", "bid_text": "USD 6,000"},
+        {"lot": 106, "current_bid": 6500, "next_bid": 7000, "shown_amount": 6500, "status": "Open", "estimate": "Estimate: USD 8,000 - 10,000", "bid_text": "USD 6,500"},
+        {"lot": 117, "current_bid": 2200, "next_bid": 2400, "shown_amount": 2200, "status": "Open", "estimate": "Estimate: USD 3,000 - 4,000", "bid_text": "USD 2,200"},
+        {"lot": 118, "current_bid": 7000, "next_bid": 7500, "shown_amount": 7000, "status": "Open", "estimate": "Estimate: USD 10,000 - 12,000", "bid_text": "USD 7,000"},
+        {"lot": 140, "current_bid": 7000, "next_bid": 7500, "shown_amount": 7000, "status": "Open", "estimate": "Estimate: USD 7,000 - 9,000", "bid_text": "USD 7,000"},
+        {"lot": 141, "current_bid": 6500, "next_bid": 7000, "shown_amount": 6500, "status": "Open", "estimate": "Estimate: USD 8,000 - 10,000", "bid_text": "USD 6,500"},
+        {"lot": 144, "current_bid": 18000, "next_bid": 19000, "shown_amount": 18000, "status": "Open", "estimate": "Estimate: USD 20,000 - 25,000", "bid_text": "USD 18,000"},
+        {"lot": 145, "current_bid": 18000, "next_bid": 19000, "shown_amount": 18000, "status": "Open", "estimate": "Estimate: USD 20,000 - 25,000", "bid_text": "USD 18,000"},
+        {"lot": 146, "current_bid": 9000, "next_bid": 9000, "shown_amount": 9000, "status": "Open", "estimate": "Estimate: USD 12,000 - 15,000", "bid_text": "USD 9,000"},
+        {"lot": 158, "current_bid": 24000, "next_bid": 26000, "shown_amount": 24000, "status": "Open", "estimate": "Estimate: USD 20,000 - 25,000", "bid_text": "USD 24,000"}
+      ]
+    };
+    
+    // Function to load data (now just returns embedded data)
+    async function loadAuctionData() {
+      return EMBEDDED_AUCTION_DATA;
+    }
+    
+
+    // Parse data from JSON structure instead of text blocks
+    function parseLotsFromJSON(data) {
+      const lotBlocks = {};
+      if (data.entries) {
+        for (const entry of data.entries) {
+          lotBlocks[entry.lot] = entry;
+        }
+      }
+      return lotBlocks;
+    }
+
+    function pickFirstNonEmptyLine(text) {
+      const lines = text.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+      return lines[0] || "";
+    }
+
+    function findEstimate(entry) {
+      if (entry.estimate) {
+        // Parse "Estimate: USD 4,000 - 6,000" format
+        const match = entry.estimate.match(/USD\s*([0-9,]+)\s*-\s*([0-9,]+)/);
+        if (match) {
+          const lo = Number(match[1].replace(/,/g, ""));
+          const hi = Number(match[2].replace(/,/g, ""));
+      return [lo, hi];
+        }
+      }
+      return null;
+    }
+
+    function findCurrentBid(entry) {
+      if (entry.current_bid && entry.current_bid > 0) {
+        // We don't have bid count in JSON, so we'll use a placeholder
+        return { bids: 1, amount: entry.current_bid };
+      }
+      return null;
+    }
+
+    function findStartingBid(entry) {
+      // If there's no current bid but there's a next_bid, use that as starting
+      if (!entry.current_bid && entry.next_bid) {
+        return entry.next_bid;
+      }
+      return null;
+    }
+
+    function findClosing(entry) {
+      // We don't have closing info in the JSON, so return null
+      return null;
+    }
+
+    function currency(n) {
+      return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+    }
+
+    function createPriceVisualization(estimate, currentAmount, startingAmount, bidType) {
+      if (!estimate || !estimate[0] || !estimate[1]) {
+        return '<div class="note">No estimate available</div>';
+      }
+      
+      const [lowEst, highEst] = estimate;
+      
+      // Calculate the range for the bar - start $2000 below low estimate, extend beyond high estimate
+      const range = highEst - lowEst;
+      const minRange = lowEst - 2000; // Start $2000 below low estimate
+      const maxRange = highEst + (range * 0.2); // 20% padding above high estimate
+      const totalRange = maxRange - minRange;
+      
+      // Calculate positions as percentages
+      const lowEstPos = ((lowEst - minRange) / totalRange) * 100;
+      const highEstPos = ((highEst - minRange) / totalRange) * 100;
+      
+      let markers = '';
+      let labels = '';
+      
+      // Add estimate markers
+      markers += `<div class="price-marker estimate-low" style="left: ${lowEstPos}%"></div>`;
+      markers += `<div class="price-marker estimate-high" style="left: ${highEstPos}%"></div>`;
+      
+      // Add current bid marker if there's a current bid
+      if (currentAmount && currentAmount > 0) {
+        const currentPos = ((currentAmount - minRange) / totalRange) * 100;
+        const clampedCurrentPos = Math.max(0, Math.min(100, currentPos));
+        markers += `<div class="price-marker current" style="left: ${clampedCurrentPos}%"></div>`;
+      }
+      
+      // No starting bid marker for lots with no bids - we don't want to show it
+      
+      // Create current price display if exists
+      let currentPriceDisplay = '';
+      if (currentAmount && currentAmount > 0) {
+        currentPriceDisplay = `<div class="current-price-display">Current: ${currency(currentAmount)}</div>`;
+      } else if (startingAmount && startingAmount > 0 && (!currentAmount || currentAmount === 0)) {
+        currentPriceDisplay = `<div class="current-price-display" style="background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%); box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);">
+          <div style="font-size: 1.1rem; margin-bottom: 4px;">No Bids</div>
+          <div style="font-size: 0.9rem; opacity: 0.9;">Starting: ${currency(startingAmount)}</div>
+        </div>`;
+      }
+      
+      // Create estimate labels with mobile-friendly positioning
+      const isMobile = window.innerWidth <= 768;
+      const labelSpacing = isMobile ? 15 : 0; // Minimum spacing between labels on mobile
+      
+      let lowLabelStyle = `left: ${lowEstPos}%; transform: translateX(-50%);`;
+      let highLabelStyle = `left: ${highEstPos}%; transform: translateX(-50%);`;
+      
+      // On mobile, adjust positioning if labels are too close
+      if (isMobile && Math.abs(highEstPos - lowEstPos) < labelSpacing) {
+        // If too close, offset one label vertically
+        lowLabelStyle += ' top: 0px;';
+        highLabelStyle += ' top: 18px;';
+      } else {
+        // Ensure labels are positioned at the top of their container
+        lowLabelStyle += ' top: 0px;';
+        highLabelStyle += ' top: 0px;';
+      }
+      
+      const estimateLabels = `
+        <div class="price-label" style="${lowLabelStyle}">
+          <div class="price-label-value">${currency(lowEst)}</div>
+          <div class="price-label-type">Low</div>
+        </div>
+        <div class="price-label" style="${highLabelStyle}">
+          <div class="price-label-value">${currency(highEst)}</div>
+          <div class="price-label-type">High</div>
+        </div>
+      `;
+      
+      return `
+        <div class="price-visualization">
+          ${currentPriceDisplay}
+          <div class="price-bar-container">
+            ${markers}
+          </div>
+          <div class="price-labels">
+            ${estimateLabels}
+          </div>
+        </div>
+      `;
+    }
+
+    function formatBidInfo(bidType, bidsCount, amount) {
+      if (bidType === 'Current') {
+        return `<span class="pill current">${bidType}</span>`;
+      } else if (bidType === 'No Bids Yet') {
+        return `<span class="pill starting">${bidType}</span>`;
+      } else {
+        return '<div class="no-bid">No Bids Yet</div>';
+      }
+    }
+
+    function parseTargetLotsFromJSON(data, targetLots) {
+      const blocks = parseLotsFromJSON(data);
+      const rows = [];
+      for (const lot of targetLots) {
+        const entry = blocks[lot];
+        const title = entry ? `Lot ${lot} - ${entry.bid_text || 'No description'}` : "";
+        const estimate = entry ? findEstimate(entry) : null;
+        const current = entry ? findCurrentBid(entry) : null;
+        const starting = entry ? findStartingBid(entry) : null;
+        const closing = entry ? findClosing(entry) : null;
+
+        let usedAmount = null;
+        let bidType = null;
+        let bidsCount = null;
+
+        if (current) {
+          usedAmount = current.amount;
+          bidsCount = current.bids;
+          bidType = "Current";
+        } else if (entry && entry.shown_amount && entry.shown_amount > 0) {
+          usedAmount = entry.shown_amount;
+          bidsCount = 1;
+          bidType = "Current";
+        } else {
+          usedAmount = 0;
+          bidsCount = 0;
+          bidType = starting != null ? "No Bids Yet" : null;
+        } 
+
+        rows.push({
+          lot,
+          title,
+          estimate,
+          bidType,
+          bidsCount,
+          amount: usedAmount,
+          startingAmount: starting,
+          startingOnly: (!current && starting != null),
+          closing,
+          missing: !entry
+        });
+      }
+      return rows;
+    }
+
+    function render(results) {
+      const container = document.getElementById("results");
+      const total = results
+        .filter(r => typeof r.amount === "number" && r.amount > 0)
+        .reduce((sum, r) => sum + r.amount, 0);
+
+      const missingCurrent = results.filter(r => r.startingOnly);
+      const notFound = results.filter(r => r.missing);
+
+      let html = "";
+      html += `<div class="totals">Sum of selected bids: ${currency(total)}</div>`;
+
+      if (notFound.length) {
+        html += `<div class="note warn">${notFound.length} lot(s) not found in data: ${notFound.map(r => r.lot).join(", ")}.</div>`;
+      }
+
+      html += `<table>
+        <thead>
+          <tr>
+            <th>Lot</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Bids</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+      for (const r of results) {
+        const priceVisualization = createPriceVisualization(r.estimate, r.amount, r.startingAmount, r.bidType);
+        const bidsText = r.bidsCount !== null ? r.bidsCount : "<span class='note'>—</span>";
+        
+        html += `<tr>
+          <td><strong>${r.lot}</strong></td>
+          <td>${r.title ? r.title : "<span class='note'>—</span>"}</td>
+          <td>${priceVisualization}</td>
+          <td>${bidsText}</td>
+        </tr>`;
+      }
+      html += `</tbody></table>`;
+
+      container.innerHTML = html;
+    }
+
+    function parseLotList(input) {
+      return input.split(/[\s,]+/)
+        .map(s => s.trim()).filter(Boolean)
+        .map(Number).filter(n => Number.isFinite(n));
+    }
+
+    // Extract closing information from auction data
+    function extractClosingInfo(auctionData) {
+      // Look for "Closing" on one line followed by "X days" on the next line
+      const lines = auctionData.split('\n').slice(0, 10); // Check first 10 lines
+      for (let i = 0; i < lines.length - 1; i++) {
+        const currentLine = lines[i].trim();
+        const nextLine = lines[i + 1].trim();
+        
+        // Check if current line contains "Closing" and next line contains days
+        if (currentLine.toLowerCase().includes('closing') && nextLine.match(/\d+\s*days?/i)) {
+          const match = nextLine.match(/(\d+)\s*days?/i);
+          if (match) {
+            return `Auction closing in ${match[1]} days`;
+          }
+        }
+      }
+      return "Auction closing information not found";
+    }
+
+    // Automatically run the summary when the page loads
+    async function runSummary() {
+      try {
+        // Load data from embedded JSON
+        const data = await loadAuctionData();
+        
+      // Update closing info
+        const closingInfo = data.auction_url ? 
+          `Auction data loaded from ${new Date(data.ts).toLocaleString()}` : 
+          "Auction data not available";
+      document.getElementById('closing-info').textContent = closingInfo;
+      
+        // Run the summary with JSON data
+        const rows = parseTargetLotsFromJSON(data, data.lots_requested);
+      render(rows);
+      } catch (error) {
+        console.error('Error running summary:', error);
+        document.getElementById('closing-info').textContent = "Error loading auction data";
+        document.getElementById('results').innerHTML = '<div class="note warn">Error loading auction data.</div>';
+      }
+    }
+
+    // Run the summary immediately when the page loads
+    document.addEventListener('DOMContentLoaded', runSummary);
+  </script>
+</body>
+</html>
