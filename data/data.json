@@ -1,10 +1,10 @@
 {
-  "ts": "2025-09-19T14:13:15.564Z",
+  "ts": "2025-09-19T14:33:55.265Z",
   "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
   "auction_closing": {
     "closing_time": "2025-09-19T14:03:00.000Z",
     "closing_timestamp": "2025-09-19T14:03:00.000Z",
-    "time_remaining_ms": -615549
+    "time_remaining_ms": -1855245
   },
   "lots_requested": [
     5,
@@ -28,7 +28,7 @@
     146,
     158
   ],
-  "total": 225500,
+  "total": 230500,
   "lots_with_bids": 19,
   "lots_without_bids": 1,
   "entries": [
@@ -45,35 +45,35 @@
     },
     {
       "lot": 18,
-      "current_bid": 9500,
-      "next_bid": 10000,
-      "shown_amount": 9500,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 12000,
+      "shown_amount": 12000,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 9,500",
-      "bid_count": 10,
+      "bid_text": "Place next bid: USD 12,000",
+      "bid_count": 12,
       "has_no_bids": false
     },
     {
       "lot": 20,
-      "current_bid": 8000,
+      "current_bid": null,
       "next_bid": 8500,
-      "shown_amount": 8000,
-      "status": "Open",
+      "shown_amount": 8500,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 8,000",
+      "bid_text": "Place next bid: USD 8,500",
       "bid_count": 7,
       "has_no_bids": false
     },
     {
       "lot": 28,
-      "current_bid": 7500,
-      "next_bid": 8000,
-      "shown_amount": 7500,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 9000,
+      "shown_amount": 9000,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 7,500",
-      "bid_count": 6,
+      "bid_text": "Place next bid: USD 9,000",
+      "bid_count": 8,
       "has_no_bids": false
     },
     {
@@ -100,13 +100,13 @@
     },
     {
       "lot": 75,
-      "current_bid": 9000,
-      "next_bid": 9500,
-      "shown_amount": 9000,
+      "current_bid": 9500,
+      "next_bid": 10000,
+      "shown_amount": 9500,
       "status": "Open",
       "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 9,000",
-      "bid_count": 7,
+      "bid_text": "USD 9,500",
+      "bid_count": 8,
       "has_no_bids": false
     },
     {
