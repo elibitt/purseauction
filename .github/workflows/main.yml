@@ -3,7 +3,7 @@ name: Scrape Christies
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "*/15 * * * *"  # every 15 minutes; adjust as needed
+    - cron: "*/5 * * * *"  # every 15 minutes; adjust as needed
 
 permissions:
   contents: write   # allow committing back to repo

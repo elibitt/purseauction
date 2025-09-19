@@ -225,9 +225,16 @@
       }
       
       th:nth-child(4), td:nth-child(4) { /* Bids column */
-        width: 13%;
+        width: 10%;
         padding: 8px 4px;
         text-align: center;
+      }
+      
+      th:nth-child(5), td:nth-child(5) { /* Time Remaining column */
+        width: 15%;
+        padding: 8px 4px;
+        text-align: center;
+        font-size: 0.8rem;
       }
       
       /* Prevent price label overlap on mobile */
@@ -303,9 +310,16 @@
       }
       
       th:nth-child(4), td:nth-child(4) { /* Bids column */
-        width: 10%;
+        width: 8%;
         padding: 6px 2px;
         text-align: center;
+      }
+      
+      th:nth-child(5), td:nth-child(5) { /* Time Remaining column */
+        width: 12%;
+        padding: 6px 2px;
+        text-align: center;
+        font-size: 0.7rem;
       }
     }
   </style>
@@ -405,6 +419,26 @@
         return `${hours} hour${hours !== 1 ? 's' : ''}, ${minutes} minute${minutes !== 1 ? 's' : ''} remaining`;
       } else {
         return `${minutes} minute${minutes !== 1 ? 's' : ''} remaining`;
+      }
+    }
+
+    function formatLotTimeRemaining(secondsRemaining) {
+      if (!secondsRemaining || secondsRemaining <= 0) {
+        return "Closed";
+      }
+      
+      const totalMinutes = Math.floor(secondsRemaining / 60);
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      const days = Math.floor(hours / 24);
+      const remainingHours = hours % 24;
+      
+      if (days > 0) {
+        return `${days}d ${remainingHours}h ${minutes}m`;
+      } else if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+      } else {
+        return `${minutes}m`;
       }
     }
 
@@ -513,7 +547,7 @@
       const rows = [];
       for (const lot of targetLots) {
         const entry = blocks[lot];
-        const title = entry ? `Lot ${lot} - ${entry.bid_text || 'No description'}` : "";
+        const title = entry ? (entry.title || `Lot ${lot} - ${entry.bid_text || 'No description'}`) : "";
         const estimate = entry ? findEstimate(entry) : null;
         const current = entry ? findCurrentBid(entry) : null;
         const starting = entry ? findStartingBid(entry) : null;
@@ -547,7 +581,8 @@
           startingAmount: starting,
           startingOnly: (!current && starting != null),
           closing,
-          missing: !entry
+          missing: !entry,
+          timeRemaining: entry ? formatLotTimeRemaining(entry.seconds_remaining) : "—"
         });
       }
       return rows;
@@ -578,6 +613,7 @@
             <th>Title</th>
             <th>Price</th>
             <th>Bids</th>
+            <th>Time Remaining</th>
           </tr>
         </thead>
         <tbody>`;
@@ -591,6 +627,7 @@
           <td>${r.title ? r.title : "<span class='note'>—</span>"}</td>
           <td>${priceVisualization}</td>
           <td>${bidsText}</td>
+          <td>${r.timeRemaining}</td>
         </tr>`;
       }
       html += `</tbody></table>`;

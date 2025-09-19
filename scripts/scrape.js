@@ -179,7 +179,9 @@ async function main() {
         estimate: null,
         bid_text: null,
         bid_count: 0,
-        has_no_bids: true
+        has_no_bids: true,
+        title: null,
+        seconds_remaining: null
       });
       continue;
     }
@@ -199,7 +201,9 @@ async function main() {
       estimate: lot?.online_only_static_lot_data?.header_price || null,
       bid_text: bids.currency_text || null,
       bid_count: bids.bid_count,              // number of bids
-      has_no_bids: bids.has_no_bids           // boolean indicating if lot has no bids
+      has_no_bids: bids.has_no_bids,          // boolean indicating if lot has no bids
+      title: lot?.title_primary_txt || null,  // primary title of the lot
+      seconds_remaining: lot?.total_seconds_remaining || null // seconds remaining for this lot
     });
   }
 
@@ -216,7 +220,9 @@ async function main() {
         estimate: null,
         bid_text: null,
         bid_count: 0,
-        has_no_bids: true
+        has_no_bids: true,
+        title: null,
+        seconds_remaining: null
       });
     }
   }

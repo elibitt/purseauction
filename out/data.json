@@ -1,10 +1,10 @@
 {
-  "ts": "2025-09-18T20:16:38.364Z",
+  "ts": "2025-09-19T15:02:30.017Z",
   "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
   "auction_closing": {
-    "closing_time": "2025-09-19T14:00:00.000Z",
-    "closing_timestamp": "2025-09-19T14:00:00.000Z",
-    "time_remaining_ms": 63801643
+    "closing_time": "2025-09-19T14:03:00.000Z",
+    "closing_timestamp": "2025-09-19T14:03:00.000Z",
+    "time_remaining_ms": -3570008
   },
   "lots_requested": [
     5,
@@ -28,78 +28,77 @@
     146,
     158
   ],
-  "total": 198700,
+  "total": 235500,
   "lots_with_bids": 19,
   "lots_without_bids": 1,
   "entries": [
     {
       "lot": 5,
-      "current_bid": 6000,
-      "next_bid": 6500,
-      "shown_amount": 6000,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 8500,
+      "shown_amount": 8500,
+      "status": "Closed",
       "estimate": "Estimate: USD 4,000 - 6,000",
-      "bid_text": "USD 6,000",
-      "bid_count": 16,
-      "has_no_bids": false
+      "bid_text": "Place next bid: USD 8,500",
+      "bid_count": 20,
+      "has_no_bids": false,
+      "title": "A FUCHSIA OSTRICH BOLIDE 31 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": -3312
     },
     {
       "lot": 18,
-      "current_bid": 9000,
-      "next_bid": 9500,
-      "shown_amount": 9000,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 12000,
+      "shown_amount": 12000,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 9,000",
-      "bid_count": 9,
-      "has_no_bids": false
+      "bid_text": "Place next bid: USD 12,000",
+      "bid_count": 12,
+      "has_no_bids": false,
+      "title": "A RAISIN TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
+      "seconds_remaining": -2532
     },
     {
       "lot": 20,
-      "current_bid": 7000,
-      "next_bid": 7500,
-      "shown_amount": 7000,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 8500,
+      "shown_amount": 8500,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 7,000",
-      "bid_count": 5,
-      "has_no_bids": false
+      "bid_text": "Place next bid: USD 8,500",
+      "bid_count": 7,
+      "has_no_bids": false,
+      "title": "A ROUGE H CHÈVRE COROMANDEL LEATHER BIRKIN 35 WITH GOLD HARDWARE",
+      "seconds_remaining": -2592
     },
     {
       "lot": 28,
-      "current_bid": 7500,
-      "next_bid": 8000,
-      "shown_amount": 7500,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 9000,
+      "shown_amount": 9000,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 7,500",
-      "bid_count": 6,
-      "has_no_bids": false
+      "bid_text": "Place next bid: USD 9,000",
+      "bid_count": 8,
+      "has_no_bids": false,
+      "title": "A ROUGE GARANCE FJORD LEATHER BIRKIN 35 WITH GOLD HARDWARE",
+      "seconds_remaining": -1932
     },
     {
       "lot": 45,
-      "current_bid": 7000,
-      "next_bid": 7500,
-      "shown_amount": 7000,
-      "status": "Open",
+      "current_bid": null,
+      "next_bid": 10000,
+      "shown_amount": 10000,
+      "status": "Closed",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 7,000",
-      "bid_count": 5,
-      "has_no_bids": false
+      "bid_text": "Place next bid: USD 10,000",
+      "bid_count": 10,
+      "has_no_bids": false,
+      "title": "A SOLEIL TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
+      "seconds_remaining": -552
     },
     {
       "lot": 69,
-      "current_bid": 7000,
-      "next_bid": 7500,
-      "shown_amount": 7000,
-      "status": "Open",
-      "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 7,000",
-      "bid_count": 3,
-      "has_no_bids": false
-    },
-    {
-      "lot": 75,
       "current_bid": 7500,
       "next_bid": 8000,
       "shown_amount": 7500,
@@ -107,18 +106,35 @@
       "estimate": "Estimate: USD 8,000 - 10,000",
       "bid_text": "USD 7,500",
       "bid_count": 4,
-      "has_no_bids": false
+      "has_no_bids": false,
+      "title": "A WHITE EPSOM LEATHER CONSTANCE 24 WITH GOLD HARDWARE",
+      "seconds_remaining": 348
+    },
+    {
+      "lot": 75,
+      "current_bid": 12000,
+      "next_bid": 13000,
+      "shown_amount": 12000,
+      "status": "Open",
+      "estimate": "Estimate: USD 8,000 - 10,000",
+      "bid_text": "USD 12,000",
+      "bid_count": 11,
+      "has_no_bids": false,
+      "title": "A BLEU SAPHIR CHÈVRE LEATHER RETOURNE KELLY 32 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 708
     },
     {
       "lot": 79,
-      "current_bid": 6000,
-      "next_bid": 6500,
-      "shown_amount": 6000,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
       "status": "Open",
       "estimate": "Estimate: USD 7,000 - 9,000",
-      "bid_text": "USD 6,000",
-      "bid_count": 1,
-      "has_no_bids": false
+      "bid_text": "USD 7,000",
+      "bid_count": 3,
+      "has_no_bids": false,
+      "title": "A BLEU BRIGHTON CLÉMENCE LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 948
     },
     {
       "lot": 86,
@@ -129,62 +145,74 @@
       "estimate": "Estimate: USD 20,000 - 25,000",
       "bid_text": "USD 28,000",
       "bid_count": 10,
-      "has_no_bids": false
+      "has_no_bids": false,
+      "title": "A SHINY GRAPHITE NILOTICUS CROCODILE KELLY POCHETTE WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 1368
     },
     {
       "lot": 87,
-      "current_bid": 18000,
-      "next_bid": 19000,
-      "shown_amount": 18000,
+      "current_bid": 28000,
+      "next_bid": 30000,
+      "shown_amount": 28000,
       "status": "Open",
       "estimate": "Estimate: USD 20,000 - 25,000",
-      "bid_text": "USD 18,000",
-      "bid_count": 1,
-      "has_no_bids": false
+      "bid_text": "USD 28,000",
+      "bid_count": 7,
+      "has_no_bids": false,
+      "title": "A SHINY GRAPHITE NILOTICUS CROCODILE SELLIER KELLY 32 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 1428
     },
     {
       "lot": 105,
-      "current_bid": 6000,
-      "next_bid": 6500,
-      "shown_amount": 6000,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
       "status": "Open",
       "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 6,000",
-      "bid_count": 1,
-      "has_no_bids": false
+      "bid_text": "USD 7,000",
+      "bid_count": 3,
+      "has_no_bids": false,
+      "title": "A GRIS TOURTERELLE TOGO LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 2508
     },
     {
       "lot": 106,
-      "current_bid": 6500,
-      "next_bid": 7000,
-      "shown_amount": 6500,
+      "current_bid": 9500,
+      "next_bid": 10000,
+      "shown_amount": 9500,
       "status": "Open",
       "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 6,500",
-      "bid_count": 2,
-      "has_no_bids": false
+      "bid_text": "USD 9,500",
+      "bid_count": 8,
+      "has_no_bids": false,
+      "title": "A BEIGE CLÉMENCE LEATHER BIRKIN 30 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 2568
     },
     {
       "lot": 117,
-      "current_bid": 2200,
-      "next_bid": 2400,
-      "shown_amount": 2200,
+      "current_bid": 3500,
+      "next_bid": 3800,
+      "shown_amount": 3500,
       "status": "Open",
       "estimate": "Estimate: USD 3,000 - 4,000",
-      "bid_text": "USD 2,200",
-      "bid_count": 21,
-      "has_no_bids": false
+      "bid_text": "USD 3,500",
+      "bid_count": 27,
+      "has_no_bids": false,
+      "title": "A GOLD CLÉMENCE LEATHER BOLIDE 31 WITH GOLD HARDWARE",
+      "seconds_remaining": 3228
     },
     {
       "lot": 118,
-      "current_bid": 7500,
-      "next_bid": 8000,
-      "shown_amount": 7500,
+      "current_bid": 8000,
+      "next_bid": 8500,
+      "shown_amount": 8000,
       "status": "Open",
       "estimate": "Estimate: USD 10,000 - 12,000",
-      "bid_text": "USD 7,500",
-      "bid_count": 2,
-      "has_no_bids": false
+      "bid_text": "USD 8,000",
+      "bid_count": 3,
+      "has_no_bids": false,
+      "title": "A GOLD TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
+      "seconds_remaining": 3288
     },
     {
       "lot": 140,
@@ -195,29 +223,35 @@
       "estimate": "Estimate: USD 7,000 - 9,000",
       "bid_text": "USD 7,000",
       "bid_count": 3,
-      "has_no_bids": false
+      "has_no_bids": false,
+      "title": "A HAVANE EVERGRAIN LEATHER RETOURNE KELLY 32 WITH GOLD HARDWARE",
+      "seconds_remaining": 4608
     },
     {
       "lot": 141,
-      "current_bid": 6500,
-      "next_bid": 7000,
-      "shown_amount": 6500,
+      "current_bid": 7000,
+      "next_bid": 7500,
+      "shown_amount": 7000,
       "status": "Open",
       "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 6,500",
-      "bid_count": 2,
-      "has_no_bids": false
+      "bid_text": "USD 7,000",
+      "bid_count": 3,
+      "has_no_bids": false,
+      "title": "A CHOCOLATE TOGO LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 4668
     },
     {
       "lot": 144,
-      "current_bid": 18000,
-      "next_bid": 19000,
-      "shown_amount": 18000,
+      "current_bid": 19000,
+      "next_bid": 20000,
+      "shown_amount": 19000,
       "status": "Open",
       "estimate": "Estimate: USD 20,000 - 25,000",
-      "bid_text": "USD 18,000",
-      "bid_count": 1,
-      "has_no_bids": false
+      "bid_text": "USD 19,000",
+      "bid_count": 2,
+      "has_no_bids": false,
+      "title": "A SHINY COCOAN POROSUS CROCODILE BIRKIN 35 WITH PALLADIUM HARDWARE",
+      "seconds_remaining": 4848
     },
     {
       "lot": 145,
@@ -228,7 +262,9 @@
       "estimate": "Estimate: USD 20,000 - 25,000",
       "bid_text": "USD 18,000",
       "bid_count": 1,
-      "has_no_bids": false
+      "has_no_bids": false,
+      "title": "A SHINY COCAON NILOTICUS CROCODILE SELLIER KELLY 32 WITH GOLD HARDWARE",
+      "seconds_remaining": 4908
     },
     {
       "lot": 146,
@@ -239,18 +275,22 @@
       "estimate": "Estimate: USD 12,000 - 15,000",
       "bid_text": "USD 9,000",
       "bid_count": 0,
-      "has_no_bids": true
+      "has_no_bids": true,
+      "title": "A SHINY COCOAN NILOTICUS LIZARD MINI CONSTANCE WITH RUTHENIUM HARDWARE",
+      "seconds_remaining": 4968
     },
     {
       "lot": 158,
-      "current_bid": 24000,
-      "next_bid": 26000,
-      "shown_amount": 24000,
+      "current_bid": 26000,
+      "next_bid": 28000,
+      "shown_amount": 26000,
       "status": "Open",
       "estimate": "Estimate: USD 20,000 - 25,000",
-      "bid_text": "USD 24,000",
-      "bid_count": 5,
-      "has_no_bids": false
+      "bid_text": "USD 26,000",
+      "bid_count": 6,
+      "has_no_bids": false,
+      "title": "A SHINY BLACK NILOTICUS CROCODILE BIRKIN 30 WITH GOLD HARDWARE",
+      "seconds_remaining": 5688
     }
   ]
 }
