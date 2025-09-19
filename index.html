@@ -137,9 +137,9 @@
     }
     
     .price-marker.current {
-      background: var(--success-color);
+      background: var(--primary-color);
       border: 2px solid white;
-      box-shadow: 0 0 0 1px var(--success-color);
+      box-shadow: 0 0 0 1px var(--primary-color);
       width: 8px;
       height: 32px;
       top: -6px;
@@ -157,12 +157,12 @@
       text-align: center;
       margin-bottom: 8px;
       padding: 8px 12px;
-      background: linear-gradient(135deg, var(--success-color) 0%, #15803d 100%);
+      background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
       color: white;
       border-radius: 8px;
       font-weight: 700;
       font-size: 1.1rem;
-      box-shadow: 0 2px 4px rgba(22, 163, 74, 0.3);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
     }
     
     .price-labels {
@@ -482,7 +482,7 @@
       // Create current price display if exists
       let currentPriceDisplay = '';
       if (currentAmount && currentAmount > 0) {
-        currentPriceDisplay = `<div class="current-price-display">Current: ${currency(currentAmount)}</div>`;
+        currentPriceDisplay = `<div class="current-price-display">Final: ${currency(currentAmount)}</div>`;
       } else if (startingAmount && startingAmount > 0 && (!currentAmount || currentAmount === 0)) {
         currentPriceDisplay = `<div class="current-price-display" style="background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%); box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);">
           <div style="font-size: 1.1rem; margin-bottom: 4px;">No Bids</div>
