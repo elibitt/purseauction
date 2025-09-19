@@ -3,30 +3,39 @@ name: Scrape Christies
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "*/5 * * * *"  # every 15 minutes; adjust as needed
+    - cron: "*/5 * * * *"
 
 permissions:
-  contents: write   # allow committing back to repo
+  contents: write
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    concurrency:
+      group: christies-scrape
+      cancel-in-progress: true
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: 'npm'
 
       - name: Install deps
         run: npm ci
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-ms-playwright-
+
+      - name: Install Playwright (Chromium only)
+        run: npx playwright install chromium
 
       - name: Run scraper
         env:
