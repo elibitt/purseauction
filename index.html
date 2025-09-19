@@ -493,10 +493,21 @@
       
       // Add current bid marker if there's a current bid
       if (currentAmount && currentAmount > 0) {
-        const currentPos = ((currentAmount - minRange) / totalRange) * 100;
+        // Check if we should use price_realised for the marker
+        const hasPriceRealised = entry && entry.price_realised && entry.price_realised > 0;
+        let markerAmount = currentAmount;
+        let markerClass = "price-marker current";
+        
+        if (hasPriceRealised) {
+          markerAmount = entry.price_realised / 1.27;
+          markerClass = "price-marker final";
+        } else {
+          const isClosed = entry && entry.seconds_remaining !== undefined && entry.seconds_remaining <= 0;
+          markerClass = isClosed ? "price-marker final" : "price-marker current";
+        }
+        
+        const currentPos = ((markerAmount - minRange) / totalRange) * 100;
         const clampedCurrentPos = Math.max(0, Math.min(100, currentPos));
-        const isClosed = entry && entry.seconds_remaining !== undefined && entry.seconds_remaining <= 0;
-        const markerClass = isClosed ? "price-marker final" : "price-marker current";
         markers += `<div class="${markerClass}" style="left: ${clampedCurrentPos}%"></div>`;
       }
       
@@ -505,11 +516,19 @@
       // Create current price display if exists
       let currentPriceDisplay = '';
       if (currentAmount && currentAmount > 0) {
-        // Check if this lot has closed (negative or zero time remaining)
-        const isClosed = entry && entry.seconds_remaining !== undefined && entry.seconds_remaining <= 0;
-        const label = isClosed ? "Final:" : "Current:";
-        const boxClass = isClosed ? "final-price-display" : "current-price-display";
-        currentPriceDisplay = `<div class="${boxClass}">${label} ${currency(currentAmount)}</div>`;
+        // Check if price_realised is available (sold lot)
+        const hasPriceRealised = entry && entry.price_realised && entry.price_realised > 0;
+        if (hasPriceRealised) {
+          // Display price realised divided by 1.27 as final price
+          const finalPrice = entry.price_realised / 1.27;
+          currentPriceDisplay = `<div class="final-price-display">Final: ${currency(finalPrice)}</div>`;
+        } else {
+          // Check if this lot has closed (negative or zero time remaining)
+          const isClosed = entry && entry.seconds_remaining !== undefined && entry.seconds_remaining <= 0;
+          const label = isClosed ? "Final:" : "Current:";
+          const boxClass = isClosed ? "final-price-display" : "current-price-display";
+          currentPriceDisplay = `<div class="${boxClass}">${label} ${currency(currentAmount)}</div>`;
+        }
       } else if (startingAmount && startingAmount > 0 && (!currentAmount || currentAmount === 0)) {
         currentPriceDisplay = `<div class="current-price-display" style="background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%); box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);">
           <div style="font-size: 1.1rem; margin-bottom: 4px;">No Bids</div>
