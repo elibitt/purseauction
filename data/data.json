@@ -1,10 +1,10 @@
 {
-  "ts": "2025-09-18T23:49:21.241Z",
+  "ts": "2025-09-19T00:52:25.647Z",
   "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
   "auction_closing": {
     "closing_time": "2025-09-19T14:00:00.000Z",
     "closing_timestamp": "2025-09-19T14:00:00.000Z",
-    "time_remaining_ms": 51038773
+    "time_remaining_ms": 47254367
   },
   "lots_requested": [
     5,
@@ -28,7 +28,7 @@
     146,
     158
   ],
-  "total": 200700,
+  "total": 201200,
   "lots_with_bids": 19,
   "lots_without_bids": 1,
   "entries": [
@@ -155,13 +155,13 @@
     },
     {
       "lot": 106,
-      "current_bid": 7000,
-      "next_bid": 7500,
-      "shown_amount": 7000,
+      "current_bid": 7500,
+      "next_bid": 8000,
+      "shown_amount": 7500,
       "status": "Open",
       "estimate": "Estimate: USD 8,000 - 10,000",
-      "bid_text": "USD 7,000",
-      "bid_count": 3,
+      "bid_text": "USD 7,500",
+      "bid_count": 4,
       "has_no_bids": false
     },
     {
