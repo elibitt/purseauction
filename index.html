@@ -446,7 +446,7 @@
       return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
     }
 
-    function createPriceVisualization(estimate, currentAmount, startingAmount, bidType) {
+    function createPriceVisualization(estimate, currentAmount, startingAmount, bidType, entry) {
       if (!estimate || !estimate[0] || !estimate[1]) {
         return '<div class="note">No estimate available</div>';
       }
@@ -482,7 +482,10 @@
       // Create current price display if exists
       let currentPriceDisplay = '';
       if (currentAmount && currentAmount > 0) {
-        currentPriceDisplay = `<div class="current-price-display">Final: ${currency(currentAmount)}</div>`;
+        // Check if this lot has closed (negative or zero time remaining)
+        const isClosed = entry && entry.seconds_remaining !== undefined && entry.seconds_remaining <= 0;
+        const label = isClosed ? "Final:" : "Current:";
+        currentPriceDisplay = `<div class="current-price-display">${label} ${currency(currentAmount)}</div>`;
       } else if (startingAmount && startingAmount > 0 && (!currentAmount || currentAmount === 0)) {
         currentPriceDisplay = `<div class="current-price-display" style="background: linear-gradient(135deg, var(--gray-400) 0%, var(--gray-500) 100%); box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);">
           <div style="font-size: 1.1rem; margin-bottom: 4px;">No Bids</div>
@@ -582,7 +585,8 @@
           startingOnly: (!current && starting != null),
           closing,
           missing: !entry,
-          timeRemaining: entry ? formatLotTimeRemaining(entry.seconds_remaining) : "—"
+          timeRemaining: entry ? formatLotTimeRemaining(entry.seconds_remaining) : "—",
+          entry: entry
         });
       }
       return rows;
@@ -619,7 +623,7 @@
         <tbody>`;
 
       for (const r of results) {
-        const priceVisualization = createPriceVisualization(r.estimate, r.amount, r.startingAmount, r.bidType);
+        const priceVisualization = createPriceVisualization(r.estimate, r.amount, r.startingAmount, r.bidType, r.entry);
         const bidsText = r.bidsCount !== null ? r.bidsCount : "<span class='note'>—</span>";
         
         html += `<tr>
