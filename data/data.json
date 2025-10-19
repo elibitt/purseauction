@@ -1,10 +1,10 @@
 {
-  "ts": "2025-10-19T07:48:28.744Z",
+  "ts": "2025-10-19T07:54:17.755Z",
   "auction_url": "https://onlineonly.christies.com/s/handbags-online-new-york-edit/lots/3756?page=2&sortby=LotNumber",
   "auction_closing": {
     "closing_time": "2025-09-19T14:03:00.000Z",
     "closing_timestamp": "2025-09-19T14:03:00.000Z",
-    "time_remaining_ms": -2569528728
+    "time_remaining_ms": -2569877741
   },
   "lots_requested": [
     5,
@@ -43,7 +43,7 @@
       "bid_count": 20,
       "has_no_bids": false,
       "title": "A FUCHSIA OSTRICH BOLIDE 31 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2569284,
+      "seconds_remaining": -2569634,
       "price_realised": "10160.00"
     },
     {
@@ -57,7 +57,7 @@
       "bid_count": 12,
       "has_no_bids": false,
       "title": "A RAISIN TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
-      "seconds_remaining": -2568504,
+      "seconds_remaining": -2568854,
       "price_realised": "13970.00"
     },
     {
@@ -71,7 +71,7 @@
       "bid_count": 7,
       "has_no_bids": false,
       "title": "A ROUGE H CHÈVRE COROMANDEL LEATHER BIRKIN 35 WITH GOLD HARDWARE",
-      "seconds_remaining": -2568564,
+      "seconds_remaining": -2568914,
       "price_realised": "10160.00"
     },
     {
@@ -85,7 +85,7 @@
       "bid_count": 8,
       "has_no_bids": false,
       "title": "A ROUGE GARANCE FJORD LEATHER BIRKIN 35 WITH GOLD HARDWARE",
-      "seconds_remaining": -2567904,
+      "seconds_remaining": -2568254,
       "price_realised": "10795.00"
     },
     {
@@ -99,7 +99,7 @@
       "bid_count": 10,
       "has_no_bids": false,
       "title": "A SOLEIL TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
-      "seconds_remaining": -2566524,
+      "seconds_remaining": -2566874,
       "price_realised": "12065.00"
     },
     {
@@ -113,7 +113,7 @@
       "bid_count": 4,
       "has_no_bids": false,
       "title": "A WHITE EPSOM LEATHER CONSTANCE 24 WITH GOLD HARDWARE",
-      "seconds_remaining": -2565624,
+      "seconds_remaining": -2565974,
       "price_realised": "9525.00"
     },
     {
@@ -127,7 +127,7 @@
       "bid_count": 11,
       "has_no_bids": false,
       "title": "A BLEU SAPHIR CHÈVRE LEATHER RETOURNE KELLY 32 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2565264,
+      "seconds_remaining": -2565614,
       "price_realised": "15240.00"
     },
     {
@@ -141,7 +141,7 @@
       "bid_count": 4,
       "has_no_bids": false,
       "title": "A BLEU BRIGHTON CLÉMENCE LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2564844,
+      "seconds_remaining": -2565194,
       "price_realised": "9525.00"
     },
     {
@@ -155,7 +155,7 @@
       "bid_count": 10,
       "has_no_bids": false,
       "title": "A SHINY GRAPHITE NILOTICUS CROCODILE KELLY POCHETTE WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2564604,
+      "seconds_remaining": -2564954,
       "price_realised": "35560.00"
     },
     {
@@ -169,7 +169,7 @@
       "bid_count": 7,
       "has_no_bids": false,
       "title": "A SHINY GRAPHITE NILOTICUS CROCODILE SELLIER KELLY 32 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2564544,
+      "seconds_remaining": -2564894,
       "price_realised": "35560.00"
     },
     {
@@ -183,7 +183,7 @@
       "bid_count": 7,
       "has_no_bids": false,
       "title": "A GRIS TOURTERELLE TOGO LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2563104,
+      "seconds_remaining": -2563454,
       "price_realised": "11430.00"
     },
     {
@@ -197,7 +197,7 @@
       "bid_count": 10,
       "has_no_bids": false,
       "title": "A BEIGE CLÉMENCE LEATHER BIRKIN 30 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2563224,
+      "seconds_remaining": -2563574,
       "price_realised": "13970.00"
     },
     {
@@ -211,7 +211,7 @@
       "bid_count": 27,
       "has_no_bids": false,
       "title": "A GOLD CLÉMENCE LEATHER BOLIDE 31 WITH GOLD HARDWARE",
-      "seconds_remaining": -2562744,
+      "seconds_remaining": -2563094,
       "price_realised": "4445.00"
     },
     {
@@ -225,7 +225,7 @@
       "bid_count": 5,
       "has_no_bids": false,
       "title": "A GOLD TOGO LEATHER BIRKIN 35 WITH GOLD HARDWARE",
-      "seconds_remaining": -2562684,
+      "seconds_remaining": -2563034,
       "price_realised": "11430.00"
     },
     {
@@ -239,7 +239,7 @@
       "bid_count": 5,
       "has_no_bids": false,
       "title": "A HAVANE EVERGRAIN LEATHER RETOURNE KELLY 32 WITH GOLD HARDWARE",
-      "seconds_remaining": -2561184,
+      "seconds_remaining": -2561534,
       "price_realised": "10160.00"
     },
     {
@@ -253,7 +253,7 @@
       "bid_count": 4,
       "has_no_bids": false,
       "title": "A CHOCOLATE TOGO LEATHER BIRKIN 35 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2561304,
+      "seconds_remaining": -2561654,
       "price_realised": "9525.00"
     },
     {
@@ -267,7 +267,7 @@
       "bid_count": 4,
       "has_no_bids": false,
       "title": "A SHINY COCOAN POROSUS CROCODILE BIRKIN 35 WITH PALLADIUM HARDWARE",
-      "seconds_remaining": -2560944,
+      "seconds_remaining": -2561294,
       "price_realised": "27940.00"
     },
     {
@@ -281,7 +281,7 @@
       "bid_count": 3,
       "has_no_bids": false,
       "title": "A SHINY COCAON NILOTICUS CROCODILE SELLIER KELLY 32 WITH GOLD HARDWARE",
-      "seconds_remaining": -2560884,
+      "seconds_remaining": -2561234,
       "price_realised": "25400.00"
     },
     {
@@ -295,7 +295,7 @@
       "bid_count": 1,
       "has_no_bids": false,
       "title": "A SHINY COCOAN NILOTICUS LIZARD MINI CONSTANCE WITH RUTHENIUM HARDWARE",
-      "seconds_remaining": -2561004,
+      "seconds_remaining": -2561354,
       "price_realised": "11430.00"
     },
     {
@@ -309,7 +309,7 @@
       "bid_count": 7,
       "has_no_bids": false,
       "title": "A SHINY BLACK NILOTICUS CROCODILE BIRKIN 30 WITH GOLD HARDWARE",
-      "seconds_remaining": -2560284,
+      "seconds_remaining": -2560634,
       "price_realised": "35560.00"
     }
   ]
